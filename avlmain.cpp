@@ -2,9 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <locale>
 
 void input_build(std::string input);
-void dictionary_build(std::string dict);
+Dictionary dictionary_build(std::string dict);
 
 int main(){
 
@@ -14,8 +15,15 @@ int main(){
   std::string dictionary_name = "dictSmall.txt";
 
   input_build(in_file_name);
-  dictionary_build(dictionary_name);
 
+  Dictionary avl_dict = dictionary_build(dictionary_name);
+
+//   if(avl_dict.FindEntry("impuse") == true){
+//
+//     std::cout << "It works!" << endl;
+//   }else
+//       std::cout << "It doesn't work..." << endl;
+//
   return 0;
 }
 
@@ -26,6 +34,7 @@ void input_build(std::string input){
   std::string out_file_name, str;
   std::ifstream in_s;
   std::ofstream out_s;
+  std::locale loc;
 
   std::cout << "Please enter the name of a file to output to:" << std::endl;
   std::cin >> out_file_name;
@@ -53,6 +62,10 @@ void input_build(std::string input){
 
   while(std::getline(in_s, str)){
 
+    for(std::string::size_type i = 0; i < str.length(); i++){
+      str[i] = std::tolower(str[i], loc);
+    }
+
     check.AddEntry(str);
   }
 
@@ -63,7 +76,7 @@ void input_build(std::string input){
 }
 
 //Building dictionary file I/O
-void dictionary_build(std::string dict){
+Dictionary dictionary_build(std::string dict){
 
   Dictionary dictionary;
   std::string str;
@@ -79,22 +92,13 @@ void dictionary_build(std::string dict){
     std::exit(1);
   }
 
-  out_s.open("testdict.txt");
-
-  while(out_s.fail()){
-
-    out_s.clear();
-    std::cout << "Output file opening failed, please try again." << std::endl;
-    std::exit(1);
-  }
-
   while(std::getline(in_s, str)){
 
     dictionary.AddEntry(str);
   }
 
-  dictionary.PrintSorted(out_s);
-
   in_s.close();
   out_s.close();
+
+  return dictionary;
 }
