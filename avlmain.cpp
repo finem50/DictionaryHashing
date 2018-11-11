@@ -43,13 +43,6 @@ int main(){
     }
   }
 
-  // if(avl_dict.FindEntry("impuse") == true){
-  //
-  //   std::cout << "It works!" << endl;
-  // }else
-  //     std::cout << "It doesn't work..." << endl;
-
-
   return 0;
 }
 
