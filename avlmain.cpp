@@ -20,10 +20,12 @@ int main(){
   std::vector<std::string> input = input_build(in_file_name);
   Dictionary avl_dict = dictionary_build(dictionary_name);
 
+  //Prompt user for input for the name of an output file
   std::cout << "Please enter the name of a file to output to:" << endl;
   std::cin >> out_file_name;
   out_s.open(out_file_name);
 
+  //If opening the file fails, re-prompt the user for output file name
   while(out_s.fail()){
 
     out_s.clear();
@@ -32,6 +34,10 @@ int main(){
     out_s.open(out_file_name.c_str());
 }
 
+  /**Compare each word from input to each word in dictionary. If the word is
+  **found in dictionary, return that the word is spelled correctly. If the word
+  **is spelled incorrectly, the word is output to the output file named by the user.
+  **/
   for(int i = 0; i < input.size(); i++){
 
     if(avl_dict.FindEntry(input.at(i)) == true){
@@ -66,6 +72,9 @@ std::vector<std::string> input_build(std::string input){
     in_s.open(input.c_str());
   }
 
+  /**Convert all characters from the input file to lower-case and
+  **push all lower-case words into a vector. This vector will be returned.
+  **/
   while(std::getline(in_s, str)){
 
     for(std::string::size_type i = 0; i < str.length(); i++){
@@ -90,6 +99,7 @@ Dictionary dictionary_build(std::string dict){
 
   in_s.open(dict);
 
+  //If input file opening fails, re-prompt user for input file name
   while(in_s.fail()){
 
     in_s.clear();
@@ -97,6 +107,8 @@ Dictionary dictionary_build(std::string dict){
     std::exit(1);
   }
 
+  //Add entries into dictionary object by line.
+  //Each line is assumed to be a word, and each word is a node in the AVL tree.
   while(std::getline(in_s, str)){
 
     dictionary.AddEntry(str);
