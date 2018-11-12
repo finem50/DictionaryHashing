@@ -91,7 +91,6 @@ std::vector<std::string> input_build(std::string input){
 }
 
 //Building dictionary AVL tree with file I/O
-//TODO: Seg fault 11 when repeated words entered
 Dictionary dictionary_build(std::string dict){
 
   Dictionary dictionary;
@@ -115,7 +114,7 @@ Dictionary dictionary_build(std::string dict){
     if(dictionary.FindEntry(str) == true){
 
     }else{
-      
+
     dictionary.AddEntry(str);
     }
   }
