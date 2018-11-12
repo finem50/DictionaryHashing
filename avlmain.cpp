@@ -12,9 +12,9 @@ int main(){
 
   //std::cout << "Please enter the name of a text file to spell check:" << std::endl;
   //std::cin >> in_file_name;
-  std::string in_file_name = "inputSmall.txt";
+  std::string in_file_name = "inputBig.txt";
   std::string out_file_name;
-  std::string dictionary_name = "dictSmall.txt";
+  std::string dictionary_name = "dictBig.txt";
   std::ofstream out_s;
 
   std::vector<std::string> input = input_build(in_file_name);
@@ -91,6 +91,7 @@ std::vector<std::string> input_build(std::string input){
 }
 
 //Building dictionary AVL tree with file I/O
+//TODO: Seg fault 11 when repeated words entered
 Dictionary dictionary_build(std::string dict){
 
   Dictionary dictionary;
@@ -111,7 +112,12 @@ Dictionary dictionary_build(std::string dict){
   //Each line is assumed to be a word, and each word is a node in the AVL tree.
   while(std::getline(in_s, str)){
 
+    if(dictionary.FindEntry(str) == true){
+
+    }else{
+      
     dictionary.AddEntry(str);
+    }
   }
 
   in_s.close();
