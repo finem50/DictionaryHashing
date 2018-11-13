@@ -4,14 +4,14 @@ CC = g++
 CFLAGS = -std=c++11 -c
 
 #Run "make all" in the command line to compile all programs
-all: avlmain
+all: hashmain
 
 #AVL Tree Dictionary program
-avlmain: avlmain.o
-	$(CC) avlmain.o -o avlmain
+avlmain: hashmain.o
+	$(CC) hashmain.o -o hashmain
 
 avlmain.o:
-	$(CC) $(CFLAGS) avlmain.cpp
+	$(CC) $(CFLAGS) hashmain.cpp
 
 #Hash Dictionary program
 #
